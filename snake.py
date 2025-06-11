@@ -2,33 +2,42 @@ import turtle
 from turtle import Turtle
 
 MOVE_DISTANCE = 20
+UP = 90
+DOWN = 270
+RIGHT = 0
+LEFT = 180
 
 class Snake:
     def __init__(self):
         self.snake_len = []
+        self.add_x = 0
         self.create_snake()
         self.head = self.snake_len[0]
+
     def create_snake(self):
-        add_x = 0
         for i in range(3):
-            snake = Turtle("square")
-            snake.penup()
-            snake.color("white")
-            snake.setpos(0 - add_x, 0)
-            add_x += 20
-            self.snake_len.append(snake)
+            self.add_snake()
+    def add_snake(self):
+        snake = Turtle("square")
+        snake.penup()
+        snake.color("white")
+        snake.setpos(0 - self.add_x, 0)
+        self.add_x += 20
+        self.snake_len.append(snake)
+    def extend_snake(self):
+        self.add_snake()
     def up(self):
-        if self.head.heading() != 270:
-            self.head.setheading(90)
+        if self.head.heading() != DOWN:
+            self.head.setheading(UP)
     def down(self):
-        if self.head.heading() != 90:
-            self.head.setheading(270)
+        if self.head.heading() != UP:
+            self.head.setheading(DOWN)
     def left(self):
-        if self.head.heading() != 0:
-            self.head.setheading(180)
+        if self.head.heading() != RIGHT:
+            self.head.setheading(LEFT)
     def right(self):
-        if self.head.heading() != 180:
-            self.head.setheading(0)
+        if self.head.heading() != LEFT:
+            self.head.setheading(RIGHT)
     def move(self):
         for i in range(len(self.snake_len) - 1, 0, -1):
             new_x = self.snake_len[i - 1].xcor()
