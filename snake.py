@@ -19,9 +19,11 @@ class Snake:
             self.add_snake()
     def add_snake(self):
         snake = Turtle("square")
+        # snake.hideturtle()
         snake.penup()
-        snake.color("white")
+        snake.color("blue")
         snake.setpos(0 - self.add_x, 0)
+        # snake.showturtle()
         self.add_x += 20
         self.snake_len.append(snake)
     def extend_snake(self):
@@ -44,5 +46,12 @@ class Snake:
             new_y = self.snake_len[i - 1].ycor()
             self.snake_len[i].goto(new_x, new_y)
         self.head.forward(MOVE_DISTANCE)
+    def reset_body(self):
+        for seg in self.snake_len:
+            seg.goto(1000,1000)
+        self.snake_len.clear()
+        self.create_snake()
+        self.head = self.snake_len[0]
+
 
 
